@@ -1,0 +1,48 @@
+@model JobTracker.ViewModels.AdministrationViewModel;
+@{
+    ViewBag.Title = "Create Role";
+}
+
+<div class="container col-lg-8">
+    <h1>Create</h1>
+
+    <h4>Role</h4>
+    <hr />
+
+    <h3 class="text-danger">@ViewData["InUse"]</h3>
+
+    <form method="post">
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="col-sm-6 mb-3">
+                <label asp-for="Role.RoleId" class="control-label">Id</label>
+                <input asp-for="Role.RoleId" 
+                    class="form-control" maxlength="50" required
+                    placeholder="Example:  12" />
+                <span asp-validation-for="Role.RoleId" class="text-danger"></span>
+            </div>
+            <div class="col-sm-6 mb-3">
+                <label asp-for="Role.RoleName" class="control-label">Role Name</label>
+                <input asp-for="Role.RoleName" 
+                    class="form-control" maxlength="100" 
+                    placeholder="Example:  operator"/>
+                <span asp-validation-for="Role.RoleName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+
+        </div>
+    </form>
+    
+    <div>
+        <a asp-controller="Administration" asp-action="ViewAllRoles">Back to List</a>
+    </div>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

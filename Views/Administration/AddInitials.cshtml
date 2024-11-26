@@ -1,0 +1,42 @@
+@model JobTracker.ViewModels.AdministrationViewModel;
+@{
+    ViewBag.Title = "Create Initials";
+}
+
+<div class="container col-lg-8">
+    <h1>Create</h1>
+
+    <h4>Initials</h4>
+    <hr />
+
+    <h3 class="text-danger">@ViewData["InUse"]</h3>
+
+    <form method="post">
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="col-sm-6 mb-3">
+                <label asp-for="InitialsAssigned.InitialsAssignedName" class="control-label">Initials</label>
+                <input asp-for="InitialsAssigned.InitialsAssignedName" 
+                    class="form-control" maxlength="10" required
+                    placeholder="Example:  dg6" />
+                <span asp-validation-for="InitialsAssigned.InitialsAssignedName" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group mb-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+
+        </div>
+    </form>
+    
+    <div>
+        <a asp-controller="Administration" asp-action="ViewAllInitials">Back to List</a>
+    </div>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

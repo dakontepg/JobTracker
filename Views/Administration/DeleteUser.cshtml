@@ -1,0 +1,27 @@
+@model JobTracker.Models.User
+
+@{
+    ViewData["Title"] = "Delete User";
+}
+
+<div class="container col-lg-8">
+    <h2>Delete User from Firestore & Firebase</h2>
+
+    <form asp-action="DeleteUser" asp-controller="Administration" method="post">
+        <input type="hidden" asp-for="Uid" readonly />
+
+        <div class="row">
+            <div class=" col-lg-6">
+                <label asp-for="Email" class="control-label">Email</label>
+                <input type="text" asp-for="Email" class="form-control"/>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="form-group">
+                <a asp-controller="Administration" asp-action="ViewAllUsers" class="btn btn-outline-danger">Discard Changes</a>
+                <button type="submit" class="btn btn-danger ms-2">Delete User</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,75 @@
+@model IEnumerable<JobTracker.ViewModels.JobDataViewModel>
+
+@{
+    ViewData["Title"] = "View Data";
+}
+
+<div class="container">
+
+<h2>View Firestore Data</h2>
+
+<table class="stripe nowrap" id="viewDataTable">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Initials Assigned</th>
+            <th>Job Number</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Minutes</th>
+            <th>Quantity</th>
+            <th>Operation</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model){
+            <tr>
+                <td>@item.DemoJobData.DateToday.ToString("MM/dd/yyyy")</td>
+                <td>@item.InitialsAssigned.InitialsAssignedName</td>
+                <td>@item.DemoJobData.JobNum</td>
+                <td>@item.DemoJobData.StartTime</td>
+                <td>@item.DemoJobData.EndTime</td>
+                <td>@item.DemoJobData.Minutes</td>
+                <td>@item.DemoJobData.Quantity</td>
+                <td>@item.JobOp.OpName</td>
+                <td>
+                    <a class="btn btn-primary" asp-controller="Firestore" asp-action="EditData" asp-route-id="@item.DemoJobData.JobDataId">Edit</a>
+                    @if(User.IsInRole("administrator"))
+                    {
+                        <a class="btn btn-danger" asp-controller="Firestore" asp-action="DeleteData" asp-route-id="@item.DemoJobData.JobDataId">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-controller="Home" asp-action="Index">Back to Home Page</a>
+</div>
+
+</div>
+
+
+<link href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css" rel="stylesheet" />
+
+@section scripts{
+    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
+    <script>
+        // Creates DataTable
+        // DataTable Documentation found here: https://datatables.net/
+        $(function () {
+            $('#viewDataTable').DataTable({
+                columns: [null,null,null,null,null,null,null,null, { orderable: false }],
+                order: [[0, 'asc']],
+                @* pageLength: 10,
+                searching: true,
+                lengthChange: false,
+                language: {
+                    emptyTable: 'No data found'
+                } *@
+            });
+        });
+    </script>
+}

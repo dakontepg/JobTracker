@@ -1,0 +1,46 @@
+@model JobTracker.ViewModels.EditUserViewModel
+
+@{
+    ViewData["Title"] = "Edit User";
+}
+
+<div class="container col-lg-8">
+    <h2>Edit User</h2>
+
+    <form asp-action="EditUser" method="post">
+        <input type="hidden" asp-for="Uid" />
+        <input type="hidden" asp-for="AllRoles"/> 
+
+        <div class="form-group col-lg-6 mb-2">
+            <label asp-for="Email" class="control-label"></label>
+            <input asp-for="Email" class="form-control"/>
+        </div>
+        
+        <div class="form-group">
+            <label>Roles</label>
+            @if(Model.AllRoles != null)
+            {
+                @foreach (var role in Model.AllRoles)
+                {
+                    <div class="form-check ms-2">
+                        <input type="checkbox" class="form-check-input" id="@role" name="Roles" value="@role" 
+                        @(Model.Roles != null && Model.Roles.Contains(role) ? "checked" : "") />
+                        <label class="form-check-label" for="@role">@role</label>
+                    </div>
+                }
+
+            }
+            else
+            {
+                <p>No roles available to display</p>
+            }
+
+        </div>
+        
+        <div class="form-group mt-2">
+            <a asp-controller="Administration" asp-action="ViewAllUsers" class="btn btn-outline-danger">Discard Changes</a>
+            <input type="submit" value="Save" class="btn btn-primary ms-3" />
+        </div>
+
+    </form>
+</div>

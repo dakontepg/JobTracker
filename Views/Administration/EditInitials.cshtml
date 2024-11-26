@@ -1,0 +1,52 @@
+@model JobTracker.ViewModels.AdministrationViewModel;
+
+@{
+    ViewData["Title"] = "Edit Initials";
+}
+
+<div class="container col-lg-8">
+
+    <h2>Edit Initials in Firestore</h2>
+
+    <form asp-action="EditInitials" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="InitialsAssigned.InitialsAssignedId" value="@Model.InitialsAssigned.InitialsAssignedId" readonly/>
+        <div class="form-group row">
+            <div class="col-sm-6 mb-3">
+                <label asp-for="InitialsAssigned.InitialsAssignedName" class="control-label">Initials</label>
+                <input asp-for="InitialsAssigned.InitialsAssignedName" 
+                    class="form-control" maxlength="10" required/>
+                <span asp-validation-for="InitialsAssigned.InitialsAssignedName" class="text-danger"></span>
+            </div>
+
+            <div class="col-sm-6 d-flex align-items-center">
+                
+                    <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" name="InitialsAssigned.Active" value="true" id="active" /> 
+                        <label class="form-check-label" for="active">Active</label>
+                    </div>
+                    <div>
+                        <input type="radio" class="form-check-input" name="InitialsAssigned.Active" value="false" id="inActive" /> 
+                        <label class="form-check-label" for="inActive">InActive</label>
+                    </div>
+                
+            </div>
+
+        </div>
+
+        <div class="row mb-3">
+            <div class="form-group">
+                <a asp-controller="Administration" asp-action="ViewAllInitials" class="btn btn-outline-danger">Discard Changes</a>
+                <input type="submit" value="Save Changes" class="btn btn-primary ms-3" />
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

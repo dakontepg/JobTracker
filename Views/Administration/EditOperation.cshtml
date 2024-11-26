@@ -1,0 +1,56 @@
+@model JobTracker.ViewModels.AdministrationViewModel;
+
+@{
+    ViewData["Title"] = "Edit Operation";
+}
+
+<div class="container col-lg-8">
+
+    <h2>Edit Operation in Firestore</h2>
+
+    <form asp-action="EditOperation" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="JobOp.Id" value="@Model.JobOp.Id" readonly/>
+        <div class="row">
+            <div class="col-sm-6 mb-3">
+                <label asp-for="JobOp.Id" class="control-label">Id</label>
+                <input asp-for="JobOp.Id" 
+                    class="form-control" maxlength="2" required/>
+                <span asp-validation-for="JobOp.Id" class="text-danger"></span>
+            </div>
+            <div class="col-sm-6 mb-3">
+                <label class="mr-1" style="padding-right: 1em">Operation Name</label>
+                <input class="form-control" asp-for="JobOp.OpName" required/>
+                <span asp-validation-for="JobOp.OpName" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-sm-6 d-flex align-items-center mb-3">
+            
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input" name="JobOp.Active" value="true" id="active" /> 
+                    <label class="form-check-label" for="active">Active</label>
+                </div>
+                <div>
+                    <input type="radio" class="form-check-input" name="JobOp.Active" value="false" id="inActive" /> 
+                    <label class="form-check-label" for="inActive">InActive</label>
+                </div>
+            
+        </div>
+
+        <div class="row mb-3">
+            <div class="form-group">
+                <a asp-controller="Administration" asp-action="ViewAllOperations" class="btn btn-outline-danger">Discard Changes</a>
+                <input type="submit" value="Save Changes" class="btn btn-primary ml-3" />
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

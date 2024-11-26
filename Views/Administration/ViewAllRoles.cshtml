@@ -1,0 +1,63 @@
+@model IEnumerable<JobTracker.Models.Role>
+
+@{
+    ViewData["Title"] = "View Roles";
+}
+
+<div class="container col-lg-8">
+
+    <h2>Role List</h2>
+
+    <div>
+        <a class="btn btn-primary" asp-controller="Administration" asp-action="AddRole">Create New</a>
+    </div>
+
+    <table class="col-sm-12 stripe nowrap" id="viewRolesTable">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Role Name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in Model){
+                <tr>
+                    <td>@item.RoleId</td>
+                    <td>@item.RoleName</td>
+                    <td>
+                        <a class="btn btn-primary" asp-controller="Administration" asp-action="EditRole" asp-route-id="@item.RoleId">Edit</a>
+                        <a class="btn btn-danger" asp-controller="Administration" asp-action="DeleteRole" asp-route-id="@item.RoleId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div>
+        <a asp-controller="Administration" asp-action="Index">Back to Admin Home Page</a>
+    </div>
+
+</div>
+
+<link href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css" rel="stylesheet" />
+
+@section scripts{
+    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
+    <script>
+        // Creates DataTable
+        // DataTable Documentation found here: https://datatables.net/
+        $(function () {
+            $('#viewRolesTable').DataTable({
+                columns: [null,null, { orderable: false }],
+                order: [[0, 'asc']],
+                @* pageLength: 10,
+                searching: true,
+                lengthChange: false,
+                language: {
+                    emptyTable: 'No data found'
+                } *@
+            });
+        });
+    </script>
+}

@@ -1,0 +1,91 @@
+@model JobTracker.ViewModels.JobDataViewModel;
+
+@{
+    ViewData["Title"] = "Edit Data";
+}
+
+<div class="container col-lg-8">
+
+    <h2>Edit Data in Firestore</h2>
+
+    <form asp-action="EditData" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="DemoJobData.JobDataId" value="@Model.DemoJobData.JobDataId" readonly/>
+        <div class="row">
+            <div class="col-sm-6 mb-3">
+                <label  class="control-label" asp-for="InitialsAssigned.InitialsAssignedId">Select Initials</label>
+                <select class="form-select" asp-for="InitialsAssigned.InitialsAssignedId" asp-items="ViewBag.InitialsAssigned" required></select>
+                <span asp-validation-for="InitialsAssigned.InitialsAssignedId" class="text-danger"></span>
+            </div>
+            <div class="col-sm-6 mb-3">
+                <label class="mr-1" style="padding-right: 1em">Date:</label>
+                <input class="form-control" 
+                    type="date" 
+                    asp-for="DemoJobData.DateToday" 
+                    name="DemoJobData.DateToday"/>
+                <span asp-validation-for="DemoJobData.DateToday" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 mb-3">
+                <label asp-for="DemoJobData.JobNum" class="control-label">Job Number</label>
+                <input asp-for="DemoJobData.JobNum" 
+                    class="form-control" maxlength="5" required/>
+                <span asp-validation-for="DemoJobData.JobNum" class="text-danger"></span>
+            </div>
+            <div class="col-sm-6 mb-3">
+                <label  class="control-label" asp-for="JobOp.Id">Operation</label>
+                <select class="form-select" asp-for="JobOp.Id" asp-items="ViewBag.JobOps" 
+                        required>
+                        <option value="0" selected></option></select>
+                <span asp-validation-for="JobOp.Id" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 mb-3">
+                <label asp-for="DemoJobData.StartTime" class="control-label">Start Time</label>
+                <input 
+                    type="time"
+                    asp-for="DemoJobData.StartTime"
+                    name="DemoJobData.StartTime" 
+                    class="form-control" maxlength="12" required/>
+                <span asp-validation-for="DemoJobData.StartTime" class="text-danger"></span>
+            </div>
+            <div class="col-sm-6 mb-3">
+                <label asp-for="DemoJobData.EndTime" class="control-label">End Time</label>
+                <input 
+                    type="time"
+                    asp-for="DemoJobData.EndTime"
+                    name="DemoJobData.EndTime" 
+                    class="form-control" maxlength="12" required/>
+                <span asp-validation-for="DemoJobData.EndTime" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 mb-3">
+                <label asp-for="DemoJobData.Quantity" class="control-label">Quantity</label>
+                <input asp-for="DemoJobData.Quantity" 
+                    class="form-control" maxlength="4" required/>
+                <span asp-validation-for="DemoJobData.Quantity" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="form-group">
+                <a asp-controller="Firestore" asp-action="ViewAllData" class="btn btn-outline-danger">Discard Changes</a>
+                <input type="submit" value="Save Changes" class="btn btn-primary ml-3" />
+            </div>
+        </div>
+
+    </form>
+
+
+    <div>
+        <a asp-controller="Firestore" asp-action="ViewAllData">Back to List</a>
+    </div>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

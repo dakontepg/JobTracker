@@ -1,0 +1,50 @@
+@{
+    ViewData["Title"] = "Administration Page";
+}
+    
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-md-6 mb-3">
+            <div class="card bg-primary p-3 text-center">
+                <h2 class="m-b-0">
+                    <a class="page-link" asp-controller="Administration" asp-action="ViewAllOperations">
+                        <i class="fas fa-search"></i>
+                        Manage Operations
+                    </a>
+                </h2>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="card bg-primary p-3 text-center">
+                <h2 class="m-b-0">
+                    <a class="page-link" asp-controller="Administration" asp-action="ViewAllUsers">
+                        <i class="fas fa-search"></i>
+                        Manage Users
+                    </a>
+                </h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <div class="card bg-primary p-3 text-center">
+                <h2 class="m-b-0">
+                    <a class="page-link" asp-controller="Administration" asp-action="ViewAllRoles">
+                        <i class="fas fa-search"></i>
+                        Manage Roles
+                    </a>
+                </h2>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">  
+            <div class="card bg-primary p-3 text-center">
+                <h2 class="m-b-0">
+                    <a class="page-link" asp-controller="Administration" asp-action="ViewAllInitials">
+                        <i class="fas fa-search"></i>
+                        Manage Initials
+                    </a>
+                </h2>
+            </div>
+        </div>  
+    </div>    
+</div>

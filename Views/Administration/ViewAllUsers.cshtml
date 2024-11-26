@@ -1,0 +1,73 @@
+@model List<JobTracker.Models.User>
+@{
+    ViewData["Title"] = "All Users";
+}
+
+<div class="container col-lg-8">
+
+    <h2>View Users</h2>
+
+    <table class="col-sm-12 stripe nowrap" id="viewUserTable">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Roles</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in Model)
+            {
+                <tr>
+                    <td>@item.Email</td>
+                    <td>
+                        @if (item.Roles != null && item.Roles.Any())
+                        {
+                            @foreach (var role in item.Roles)
+                            {
+                                <span class="badge bg-info text-dark">@role</span>
+                            }
+                        }
+                        else
+                        {
+                            <span class="text-muted">No Roles Assigned</span>
+                        }
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" asp-controller="Administration" asp-action="EditUser" asp-route-id="@item.Uid">Edit</a>
+                        <a class="btn btn-danger" asp-controller="Administration" asp-action="DeleteUser" asp-route-id="@item.Uid">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div>
+        <a asp-controller="Administration" asp-action="Index">Back to Administration Home Page</a>
+    </div>
+
+</div>
+
+
+<link href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css" rel="stylesheet" />
+
+@section scripts{
+    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
+    <script>
+        // Creates DataTable
+        // DataTable Documentation found here: https://datatables.net/
+        $(function () {
+            $('#viewUserTable').DataTable({
+                columns: [null,null, { orderable: false }],
+                order: [[0, 'asc']],
+                @* pageLength: 10,
+                searching: true,
+                lengthChange: false,
+                language: {
+                    emptyTable: 'No data found'
+                } *@
+            });
+        });
+    </script>
+}
+

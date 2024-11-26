@@ -1,0 +1,49 @@
+@model JobTracker.ViewModels.JobDataViewModel;
+
+@{
+    ViewData["Title"] = "Delete Data";
+}
+
+<div class="container col-lg-8">
+
+    <h2>Delete Data in Firestore</h2>
+
+    <form asp-action="DeleteData" method="post">
+            <input type="hidden" asp-for="DemoJobData.JobDataId" value="@Model.DemoJobData.JobDataId" readonly/>
+
+        <div class="row">
+            <div class="col-sm-4 mb-3">
+                <label asp-for="DemoJobData.JobNum" class="control-label">Job Number</label>
+                <input type="text" asp-for="DemoJobData.JobNum" 
+                    class="form-control"/>
+            </div>
+            <div class="col-sm-4 mb-3">
+                <label asp-for="InitialsAssigned.InitialsAssignedName" class="control-label">Initials Assigned</label>
+                <input asp-for="InitialsAssigned.InitialsAssignedName" 
+                    class="form-control" />
+            </div>
+            <div class="col-sm-4 mb-3">
+                <label class="mr-1" style="padding-right: 1em">Date:</label>
+                <input class="form-control" 
+                    type="date" 
+                    asp-for="DemoJobData.DateToday" 
+                    name="DemoJobData.DateToday"/>
+            </div>
+        </div>
+
+        <div class="form-group" style="display: none;">
+            <label asp-for="DemoJobData.JobDataId">Document ID</label>
+            <input type="text" asp-for="DemoJobData.JobDataId" class="form-control"/>
+        </div>
+
+        <div class="row mb-3">
+            <div class="form-group">
+                <a asp-controller="Firestore" asp-action="ViewAllData" class="btn btn-outline-danger">Discard Changes</a>
+            <button type="submit" class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+
+
+    </form>
+
+</div>

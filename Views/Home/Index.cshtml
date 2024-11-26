@@ -1,0 +1,55 @@
+﻿@using System.Security.Claims
+@{
+    ViewData["Title"] = "Job Data Home Page";
+}
+    
+<div>
+    @* <h3>@ViewBag.Message</h3><br> this was used to indicate the user was authenticated by Firebase.Auth*@
+    @* <p>@ViewBag.Token</p><br> this was used to debug the JWT token to ensure the user roles were correct
+    <h3>@ViewBag.Message2</h3> *@ 
+</div>
+
+<div class="card-group text-center p-2">
+
+    @* this section was used to verify the contents of the user token when debugging the roles authorization *@
+    @* @if(User.Identity.IsAuthenticated)
+    {
+        <div>
+            <h3>User Claims</h3>
+            <ul>
+                @foreach (var claim in User.Claims)
+                {
+                    <li>@claim.Type: @claim.Value</li>
+                }
+            </ul>
+        </div>
+    } *@
+
+    @if(User.IsInRole("supervisor") || User.IsInRole("administrator"))
+    {
+        <div class="card bg-primary p-3">
+            <h2 class="m-b-0">
+                <a class="page-link" asp-controller="Firestore" asp-action="ViewAllData">
+                    <i class="fas fa-search"></i>
+                    View All Data
+                </a>
+            </h2>
+        </div>
+    }
+
+    @if (User.IsInRole("operator"))
+    {
+        <div class="card bg-primary p-3">
+            <h2 class="m-b-0">
+                <a class="page-link" asp-controller="Firestore" asp-action="AddData">
+                    <i class="fas fa-users"></i>
+                    Add Data
+                </a>
+            </h2>
+        </div>
+    }
+    else
+    {
+        <p>You do not have access to this page.</p>
+    }
+</div>

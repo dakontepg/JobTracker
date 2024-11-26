@@ -1,0 +1,37 @@
+@model JobTracker.ViewModels.AdministrationViewModel;
+
+@{
+    ViewData["Title"] = "Delete Role";
+}
+
+<div class="container col-lg-8">
+
+    <h2>Delete Role in Firestore</h2>
+    <h3 class="text-danger">@ViewData["ErrorMessage"]</h3>
+
+    <form asp-action="DeleteRole" method="post">
+            <input type="hidden" asp-for="Role.RoleId" value="@Model.Role.RoleId" readonly/>
+
+        <div class="row">
+            <div class="col-sm-4 mb-3">
+                <label asp-for="Role.RoleId" class="control-label">Role Id</label>
+                <input type="text" asp-for="Role.RoleId" 
+                    class="form-control"/>
+            </div>
+            <div class="col-sm-4 mb-3">
+                <label asp-for="Role.RoleName" class="control-label">Role Name</label>
+                <input asp-for="Role.RoleName" 
+                    class="form-control" />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="form-group">
+                <a asp-controller="Administration" asp-action="ViewAllRoles" class="btn btn-outline-danger">Discard Changes</a>
+            <button type="submit" class="btn btn-danger ms-3">Delete</button>
+            </div>
+        </div>
+
+    </form>
+
+</div>

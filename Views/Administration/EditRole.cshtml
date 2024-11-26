@@ -1,0 +1,43 @@
+@model JobTracker.ViewModels.AdministrationViewModel;
+
+@{
+    ViewData["Title"] = "Edit Role";
+}
+
+<div class="container col-lg-8">
+
+    <h2>Edit Role in Firestore</h2>
+
+    <form asp-action="EditRole" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Role.RoleId" value="@Model.Role.RoleId" readonly/>
+        <div class="row">
+            <div class="col-sm-6 mb-3">
+                <label asp-for="Role.RoleId" class="control-label">Id</label>
+                <input asp-for="Role.RoleId" 
+                    class="form-control" maxlength="2" required/>
+                <span asp-validation-for="Role.RoleId" class="text-danger"></span>
+            </div>
+            <div class="col-sm-6 mb-3">
+                <label class="mr-1" style="padding-right: 1em">Role Name</label>
+                <input class="form-control" asp-for="Role.RoleName" required/>
+                <span asp-validation-for="Role.RoleName" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="form-group">
+                <a asp-controller="Administration" asp-action="ViewAllRoles" class="btn btn-outline-danger">Discard Changes</a>
+                <input type="submit" value="Save Changes" class="btn btn-primary ms-3" />
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
